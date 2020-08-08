@@ -1,6 +1,4 @@
-from application import app, chatbot, utilities
-import click
-from flask_cli import with_appcontext
+from application import app, chatbot
 from flask import render_template, request, send_from_directory, abort, session
 
 @app.route("/")
@@ -10,11 +8,6 @@ def index():
     chatbot.chatbot.clear_uservars() # To reset bot to initial chat point
     session['chatData'] = {'topic': 'random'}
     return render_template("homepage.html")
-
-@click.command(name='create_tables')
-@with_appcontext
-def create_tables():
-    utilities.db.create_all()
 
 @app.route("/get")
 def chat():

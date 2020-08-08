@@ -3,15 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 from enum import Enum
 
 
-app.config["SQLALCHEMY_DATABASE_URI"] = 'postgres://iypdniqowjsnwb:6cbe81deed2ad012ce17027fad3c084984f4b2db7324ad4eb6021e2f74fbb1a1@ec2-35-173-94-156.compute-1.amazonaws.com:5432/d5rnv8kp6o66uh'
+app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///Students_db.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Define Database
 db = SQLAlchemy(app)
-
-# Instantiate database
-#db.drop_all()
-#db.create_all()
 
 class Level(Enum):
     Freshmen = 0
@@ -22,7 +18,6 @@ class Level(Enum):
 
 # Students table
 class Student(db.Model):
-    __tablename__ = 'Student'
     id = db.Column(db.String, primary_key=True)
     name = db.Column(db.String, nullable=False)
     program = db.Column(db.String, nullable=False)
@@ -40,6 +35,10 @@ class Student(db.Model):
 
     def __repr__(self):
         return f"Student('{self.id}', '{self.gpa}')\n"
+
+# Instantiate database
+db.drop_all()
+db.create_all()
 
 # Randomize dummy data
 Student_1 = Student("17p2412", "Ahmed", "MCTA", Level.Senior2, 162, 3.7)
