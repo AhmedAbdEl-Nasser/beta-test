@@ -15,7 +15,7 @@
 + (#p#|#g#|#a#)
 - <set id=<star>><call>authenticate <get id></call>
 + *
-- ID format error, please try again.
+- Not a valid ID format
 < topic
 
 > topic request
